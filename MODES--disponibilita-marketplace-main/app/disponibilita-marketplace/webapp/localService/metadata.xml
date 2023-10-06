@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="DisponibilitaMarketplaceService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="DISPONIBILITA_FARFETCH" EntityType="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH"/>
+                <EntitySet Name="DISPONIBILITA_FARFETCH_APP" EntityType="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH_APP"/>
+                <EntitySet Name="CANCELLA_TABELLA" EntityType="DisponibilitaMarketplaceService.CANCELLA_TABELLA"/>
+                <EntitySet Name="DisponibilitaMarketplace" EntityType="DisponibilitaMarketplaceService.DisponibilitaMarketplaceParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"/>
+                <EntitySet Name="DisponibilitaMarketplaceSet" EntityType="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false"/>
+                <EntitySet Name="DisponibilitaFF" EntityType="DisponibilitaMarketplaceService.DisponibilitaFFParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"/>
+                <EntitySet Name="DisponibilitaFFSet" EntityType="DisponibilitaMarketplaceService.DisponibilitaFFType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false"/>
+                <AssociationSet Name="DisponibilitaMarketplaceParameters_Set" Association="DisponibilitaMarketplaceService.DisponibilitaMarketplaceParameters_Set">
+                    <End Role="DisponibilitaMarketplaceParameters" EntitySet="DisponibilitaMarketplace"/>
+                    <End Role="DisponibilitaMarketplaceType" EntitySet="DisponibilitaMarketplaceSet"/>
+                </AssociationSet>
+                <AssociationSet Name="DisponibilitaFFParameters_Set" Association="DisponibilitaMarketplaceService.DisponibilitaFFParameters_Set">
+                    <End Role="DisponibilitaFFParameters" EntitySet="DisponibilitaFF"/>
+                    <End Role="DisponibilitaFFType" EntitySet="DisponibilitaFFSet"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="DISPONIBILITA_FARFETCH">
+                <Key>
+                    <PropertyRef Name="CHANNEL_ID"/>
+                    <PropertyRef Name="SKU"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="CHANNEL_ID" Type="Edm.String" MaxLength="5" Nullable="false"/>
+                <Property Name="SKU" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="QUANTITY" Type="Edm.Int32"/>
+                <Property Name="SEASON_FF" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="DISPONIBILITA_FARFETCH_APP">
+                <Key>
+                    <PropertyRef Name="CHANNEL_ID"/>
+                    <PropertyRef Name="SKU"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="CHANNEL_ID" Type="Edm.String" MaxLength="5" Nullable="false"/>
+                <Property Name="SKU" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="QUANTITY" Type="Edm.Int32"/>
+                <Property Name="SEASON_FF" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="CANCELLA_TABELLA">
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="TABELLA" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="DisponibilitaMarketplaceParameters" sap:semantics="parameters">
+                <Key>
+                    <PropertyRef Name="IP_CANALE"/>
+                    <PropertyRef Name="IP_SKU"/>
+                    <PropertyRef Name="IP_BRAND_ID"/>
+                    <PropertyRef Name="IP_GENDER"/>
+                    <PropertyRef Name="IP_SUBGENDER"/>
+                    <PropertyRef Name="IP_FAMILY"/>
+                    <PropertyRef Name="IP_PRODUCT_GRP"/>
+                    <PropertyRef Name="IP_SEASON"/>
+                    <PropertyRef Name="IP_COLLECTION"/>
+                    <PropertyRef Name="IP_FARFETCH_ID"/>
+                </Key>
+                <Property Name="IP_CANALE" Type="Edm.String" MaxLength="20" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_SKU" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_BRAND_ID" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_GENDER" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_SUBGENDER" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_FAMILY" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_PRODUCT_GRP" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_SEASON" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_COLLECTION" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_FARFETCH_ID" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <NavigationProperty Name="Set" Relationship="DisponibilitaMarketplaceService.DisponibilitaMarketplaceParameters_Set" FromRole="DisponibilitaMarketplaceParameters" ToRole="DisponibilitaMarketplaceType"/>
+            </EntityType>
+            <EntityType Name="DisponibilitaMarketplaceType">
+                <Key>
+                    <PropertyRef Name="CANALE"/>
+                    <PropertyRef Name="SEASON"/>
+                    <PropertyRef Name="COLLECTION"/>
+                    <PropertyRef Name="BRAND"/>
+                    <PropertyRef Name="GENDER"/>
+                    <PropertyRef Name="SUBGENDER"/>
+                    <PropertyRef Name="FAMILY_GRP"/>
+                    <PropertyRef Name="PRODUCT_GRP"/>
+                    <PropertyRef Name="FARFETCH_ID"/>
+                    <PropertyRef Name="SKU_PARENT"/>
+                    <PropertyRef Name="SKUS"/>
+                    <PropertyRef Name="SKU_DESCRIPTION"/>
+                    <PropertyRef Name="SKU_IMAGE"/>
+                    <PropertyRef Name="VALUTA"/>
+                </Key>
+                <Property Name="CANALE" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="SEASON" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="COLLECTION" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="BRAND" Type="Edm.String" MaxLength="30" Nullable="false"/>
+                <Property Name="GENDER" Type="Edm.String" MaxLength="18" Nullable="false"/>
+                <Property Name="SUBGENDER" Type="Edm.String" MaxLength="18" Nullable="false"/>
+                <Property Name="FAMILY_GRP" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="PRODUCT_GRP" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="FARFETCH_ID" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SKU_PARENT" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SKUS" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SKU_DESCRIPTION" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SKU_IMAGE" Type="Edm.String" MaxLength="120" Nullable="false"/>
+                <Property Name="VALUE_WHOLESALE" Type="Edm.Decimal" Scale="2" Precision="11"/>
+                <Property Name="VALUE_RETAIL" Type="Edm.Decimal" Scale="2" Precision="11"/>
+                <Property Name="VALUTA" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="QUANTITY" Type="Edm.Int32"/>
+                <Property Name="TOT_VALUE_WHOLESALE" Type="Edm.Decimal" Scale="2" Precision="13"/>
+                <Property Name="TOT_VALUE_RETAIL" Type="Edm.Decimal" Scale="2" Precision="13"/>
+                <NavigationProperty Name="Parameters" Relationship="DisponibilitaMarketplaceService.DisponibilitaMarketplaceParameters_Set" FromRole="DisponibilitaMarketplaceType" ToRole="DisponibilitaMarketplaceParameters"/>
+            </EntityType>
+            <EntityType Name="DisponibilitaFFParameters" sap:semantics="parameters">
+                <Key>
+                    <PropertyRef Name="IP_CANALE"/>
+                    <PropertyRef Name="IP_SKU"/>
+                    <PropertyRef Name="IP_BRAND_ID"/>
+                    <PropertyRef Name="IP_GENDER"/>
+                    <PropertyRef Name="IP_SUBGENDER"/>
+                    <PropertyRef Name="IP_FAMILY"/>
+                    <PropertyRef Name="IP_PRODUCT_GRP"/>
+                    <PropertyRef Name="IP_SEASON"/>
+                    <PropertyRef Name="IP_COLLECTION"/>
+                    <PropertyRef Name="IP_FARFETCH_ID"/>
+                </Key>
+                <Property Name="IP_CANALE" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_SKU" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_BRAND_ID" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_GENDER" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_SUBGENDER" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_FAMILY" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_PRODUCT_GRP" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_SEASON" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_COLLECTION" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <Property Name="IP_FARFETCH_ID" Type="Edm.String" MaxLength="5000" Nullable="false" sap:parameter="mandatory"/>
+                <NavigationProperty Name="Set" Relationship="DisponibilitaMarketplaceService.DisponibilitaFFParameters_Set" FromRole="DisponibilitaFFParameters" ToRole="DisponibilitaFFType"/>
+            </EntityType>
+            <EntityType Name="DisponibilitaFFType">
+                <Key>
+                    <PropertyRef Name="STORE"/>
+                    <PropertyRef Name="SEASON"/>
+                    <PropertyRef Name="SEASON_FF"/>
+                    <PropertyRef Name="COLLECTION"/>
+                    <PropertyRef Name="BRAND"/>
+                    <PropertyRef Name="GENDER"/>
+                    <PropertyRef Name="SUBGENDER"/>
+                    <PropertyRef Name="FAMILY_GRP"/>
+                    <PropertyRef Name="PRODUCT_GRP"/>
+                    <PropertyRef Name="FARFETCH_ID"/>
+                    <PropertyRef Name="SKU_PARENT"/>
+                    <PropertyRef Name="SKUS"/>
+                    <PropertyRef Name="SKU_DESCRIPTION"/>
+                    <PropertyRef Name="SKU_IMAGE"/>
+                    <PropertyRef Name="VALUTA"/>
+                </Key>
+                <Property Name="STORE" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="SEASON" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="SEASON_FF" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="COLLECTION" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="BRAND" Type="Edm.String" MaxLength="30" Nullable="false"/>
+                <Property Name="GENDER" Type="Edm.String" MaxLength="18" Nullable="false"/>
+                <Property Name="SUBGENDER" Type="Edm.String" MaxLength="18" Nullable="false"/>
+                <Property Name="FAMILY_GRP" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="PRODUCT_GRP" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="FARFETCH_ID" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SKU_PARENT" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SKUS" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SKU_DESCRIPTION" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SKU_IMAGE" Type="Edm.String" MaxLength="120" Nullable="false"/>
+                <Property Name="VALUE_WHOLESALE" Type="Edm.Decimal" Scale="2" Precision="11"/>
+                <Property Name="VALUE_RETAIL" Type="Edm.Decimal" Scale="2" Precision="11"/>
+                <Property Name="VALUTA" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="QUANTITY" Type="Edm.Int32"/>
+                <Property Name="Quantita" Type="Edm.Int32"/>
+                <Property Name="TOT_VALUE_WHOLESALE" Type="Edm.Decimal" Scale="2" Precision="13"/>
+                <Property Name="TOT_VALUE_RETAIL" Type="Edm.Decimal" Scale="2" Precision="13"/>
+                <NavigationProperty Name="Parameters" Relationship="DisponibilitaMarketplaceService.DisponibilitaFFParameters_Set" FromRole="DisponibilitaFFType" ToRole="DisponibilitaFFParameters"/>
+            </EntityType>
+            <Association Name="DisponibilitaMarketplaceParameters_Set">
+                <End Role="DisponibilitaMarketplaceParameters" Type="DisponibilitaMarketplaceService.DisponibilitaMarketplaceParameters" Multiplicity="0..1"/>
+                <End Role="DisponibilitaMarketplaceType" Type="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType" Multiplicity="*"/>
+            </Association>
+            <Association Name="DisponibilitaFFParameters_Set">
+                <End Role="DisponibilitaFFParameters" Type="DisponibilitaMarketplaceService.DisponibilitaFFParameters" Multiplicity="0..1"/>
+                <End Role="DisponibilitaFFType" Type="DisponibilitaMarketplaceService.DisponibilitaFFType" Multiplicity="*"/>
+            </Association>
+            <Annotations Target="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH_APP/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH_APP/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH_APP/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DISPONIBILITA_FARFETCH_APP/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.CANCELLA_TABELLA/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.CANCELLA_TABELLA/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.CANCELLA_TABELLA/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.CANCELLA_TABELLA/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/CANALE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="CANALE"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/SEASON" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SEASON"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/COLLECTION" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="COLLECTION"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/BRAND" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="BRAND"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/GENDER" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="GENDER"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/SUBGENDER" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SUBGENDER"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/FAMILY_GRP" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="FAMILY_GRP"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/PRODUCT_GRP" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="PRODUCT_GRP"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/FARFETCH_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="FARFETCH_ID"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/SKU_PARENT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SKU_PARENT"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/SKUS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SKUS"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/SKU_DESCRIPTION" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SKU_DESCRIPTION"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/SKU_IMAGE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SKU_IMAGE"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/VALUE_WHOLESALE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="VALUE_WHOLESALE"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/VALUE_RETAIL" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="VALUE_RETAIL"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/VALUTA" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="VALUTA"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/QUANTITY" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="QUANTITY"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/TOT_VALUE_WHOLESALE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="TOT_VALUE_WHOLESALE"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaMarketplaceType/TOT_VALUE_RETAIL" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="TOT_VALUE_RETAIL"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/STORE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="STORE"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/SEASON" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SEASON"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/SEASON_FF" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SEASON"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/COLLECTION" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="COLLECTION"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/BRAND" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="BRAND"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/GENDER" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="GENDER"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/SUBGENDER" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SUBGENDER"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/FAMILY_GRP" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="FAMILY_GRP"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/PRODUCT_GRP" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="PRODUCT_GRP"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/FARFETCH_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="FARFETCH_ID"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/SKU_PARENT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SKU_PARENT"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/SKUS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SKUS"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/SKU_DESCRIPTION" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SKU_DESCRIPTION"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/SKU_IMAGE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="SKU_IMAGE"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/VALUE_WHOLESALE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="VALUE_WHOLESALE"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/VALUE_RETAIL" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="VALUE_RETAIL"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/VALUTA" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="VALUTA"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/QUANTITY" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="QUANTITY"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/TOT_VALUE_WHOLESALE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="TOT_VALUE_WHOLESALE"/>
+            </Annotations>
+            <Annotations Target="DisponibilitaMarketplaceService.DisponibilitaFFType/TOT_VALUE_RETAIL" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="TOT_VALUE_RETAIL"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

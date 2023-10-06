@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+  <Dialog
+    id="channelFilterDialog"
+    title="Seleziona un canale"
+  >
+
+  	<Panel width="auto" class="sapUiResponsiveMargin">
+		<content>
+
+			<Label text="Lista Canali"></Label>
+      
+      <ComboBox
+        width="90%"
+        class="sapUiSmallMarginBegin"
+				selectedKey="{modelDialog>/filters/IP_CANALE}"
+        items="{ path: 'channelModel>/'}"
+        id="selectedChannel" >
+				<core:Item key="{channelModel>CHANNEL_ID}" text="{channelModel>CHANNEL_DESCR}" />
+        
+
+			</ComboBox>
+        
+		</content>
+	</Panel>
+      <beginButton>
+           <Button class="sapUiSmallMarginBegin" text="Ricerca" press="channelFilterSearch" type="Emphasized"/>
+         </beginButton>
+      
+    </Dialog>
+</core:FragmentDefinition>

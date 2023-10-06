@@ -1,0 +1,509 @@
+<mvc:View
+    controllerName="disponibilitamarketplace.controller.Main"
+    xmlns:table="sap.ui.table"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <fb:FilterBar
+                reset="resetFilters"
+                search="onSearch"
+                showRestoreOnFB="true"
+                useToolbar="false"
+                id="smartFilterBar"
+                showFilterConfiguration="true"
+            >
+            
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="Canale"
+                        label="Canale"
+                        labelTooltip="Canale"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <Input
+                                value=""
+                                enabled="false"
+                                id="inputCanale"
+                            />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="sku"
+                        label="Sku"
+                        labelTooltip="Sku"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiSku"
+                                selectedKeys="{sFilter>/SKUS}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/disponibilitaMarketplace' }"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>SKUS}"
+                                        key="{temp>SKUS}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="brand"
+                        label="Brand"
+                        labelTooltip="Brand"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiBrand"
+                                selectedKeys="{sFilter>/BRAND}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/FilterBrandUniq'}"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>BRAND}"
+                                        key="{temp>BRAND}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="collection"
+                        label="Collection"
+                        labelTooltip="Collection"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiCollection"
+                                selectedKeys="{sFilter>/COLLECTION}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/FilterCollectionUniq' }"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>COLLECTION}"
+                                        key="{temp>COLLECTION}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="season"
+                        label="Season"
+                        labelTooltip="Season"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiSeason"
+                                selectedKeys="{sFilter>/SEASON}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/FilterSeasonUniq' }"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>SEASON}"
+                                        key="{temp>SEASON}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="gender"
+                        label="Gender"
+                        labelTooltip="Gender"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiGender"
+                                selectedKeys="{sFilter>/GENDER}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/FilterGenderUniq' }"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>GENDER}"
+                                        key="{temp>GENDER}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="subgender"
+                        label="Sub Gender"
+                        labelTooltip="Sub Gender"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiSubGender"
+                                selectedKeys="{sFilter>/SUBGENDER}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/FilterSubGenderUniq' }"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>SUBGENDER}"
+                                        key="{temp>SUBGENDER}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="family group"
+                        label="Family Group"
+                        labelTooltip="Family Group"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiFamilyGroup"
+                                selectedKeys="{sFilter>/FAMILY_GRP}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/FilterFamGrpUniq' }"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>FAMILY_GRP}"
+                                        key="{temp>FAMILY_GRP}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="SKU PARENT"
+                        label="SKU PARENT"
+                        labelTooltip="SKU PARENT"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiSKUPARENTGroup"
+                                selectedKeys="{sFilter>/SKU_PARENT}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/Filtersku_parent_uniqe' }"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>SKU_PARENT}"
+                                        key="{temp>SKU_PARENT}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="product group"
+                        label="Product Group"
+                        labelTooltip="Product Group"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiProductGroup"
+                                selectedKeys="{sFilter>/PRODUCT_GRP}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/FilterProdGrpUniq' }"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>PRODUCT_GRP}"
+                                        key="{temp>PRODUCT_GRP}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="Filtri"
+                        groupTitle="Filtri"
+                        name="ffID"
+                        label="Farfetch ID"
+                        labelTooltip="Farfetch ID"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                id="multiFFID"
+                                selectedKeys="{sFilter>/FARFETCH_ID}"
+                                showSecondaryValues="true"
+                                items="{ path: 'temp>/FilterfarFetchUniq'}"
+                            >
+                                <items>
+                                    <core:ListItem
+                                        text="{temp>FARFETCH_ID}"
+                                        key="{temp>FARFETCH_ID}"
+                                    />
+                                </items>
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+                <FlexBox >
+                  <FlexBox
+                    direction="Column"
+                  >
+                    <Label text="SKU Parents:" />
+                    <Input
+                      id="skuParentsInput"
+                      editable="false"
+                      width="15rem"
+                    />
+                  </FlexBox>
+                  <FlexBox
+                    direction="Column"
+                  >
+                    <Label text="Quantity:" />
+                    <Input
+                      id="quantityInput"
+                      editable="false"
+                      width="15rem"
+                      value="{temp>/FilterquantityInputUniq/quantityInput}"
+                    />
+                  </FlexBox>
+                  <FlexBox
+                    direction="Column"
+                  >
+                    <Label text="Total Value Wholsesale:" />
+                    <Input
+                      id="wholesaleInput"
+                      editable="false"
+                      width="15rem"
+                      value="{temp>/FilterwholesaleInputUniq/wholesaleInput}"
+                    />
+                  </FlexBox>
+                  <FlexBox
+                    direction="Column"
+                  >
+                    <Label text="Total Value Retail:" />
+                    <Input
+                      id="retailInput"
+                      editable="false"
+                      width="15rem"
+                    value="{temp>/FilterretailInputUniq/retailInput}"
+                    />
+                  </FlexBox>
+                </FlexBox>
+            </fb:FilterBar>
+        </content>
+        <content />
+        <content>
+            <Table
+                id="header"
+                showNoData='false'
+            >
+            <headerToolbar>
+				<OverflowToolbar>
+					<Title text="Products" level="H2"/>
+					<ToolbarSpacer/>
+					<Button
+						tooltip="Reset Filter"
+						icon="sap-icon://sort"
+						press="handleSortButtonPressed"/>
+				</OverflowToolbar>
+			</headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="Channel" />
+                    </Column>
+                     <Column>
+                        <Text text="Sku Parent" />
+                    </Column>
+                    <Column>
+                        <Text text="Sku" />
+                    </Column>
+                    <Column>
+                        <Text text="Farfetch ID" />
+                    </Column>
+                    <Column>
+                        <Text text="Sku Description" />
+                    </Column>
+                    <Column>
+                        <Text text="Photo" />
+                    </Column>
+                    <Column>
+                        <Text text="Season" />
+                    </Column>
+                    <Column>
+                        <Text text="Brand" />
+                    </Column>
+                    <Column>
+                        <Text text="Gender" />
+                    </Column>
+                    <Column>
+                        <Text text="Subgender" />
+                    </Column>
+                    <Column>
+                        <Text text="Family Group" />
+                    </Column>
+                    <Column>
+                        <Text text="Product Group" />
+                    </Column>
+                    <Column>
+                        <Text text="Value Wholesale" />
+                    </Column>
+                    <Column>
+                        <Text text="Value Retail" />
+                    </Column>
+                    <Column>
+                        <Text text="Quantity" />
+                    </Column>
+                    <Column>
+                        <Text text="Tot. Value Wholesale" />
+                    </Column>
+                    <Column>
+                        <Text text="Tot. Value Retail" />
+                    </Column>
+                    <Column>
+                        <Text text="Valuta" />
+                    </Column>
+                </columns>
+            </Table>
+            <ScrollContainer
+                width="100%"
+                height="100%"
+                vertical="true"
+                horizontal="true"
+            >
+                <Table
+                    id="smartTable"
+                    inset="false"
+                    items="{path:'temp>/disponibilitaMarketplace'}"
+                    class="sapUiLargeMarginBottom"
+                    growingScrollToLoad="true"
+                    growing="true"
+                    growingThreshold="100"
+                >
+                    <columns>
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                        <Column />
+                    </columns>
+                    <items>
+                        <ColumnListItem
+                            vAlign="Middle"
+                            type="Active"
+                        >
+                            <cells>
+                                <Text text="{path: 'temp>CANALE'}" />
+                                <Text text="{path: 'temp>SKU_PARENT'}" />
+                                <Text text="{path: 'temp>SKUS'}" />
+                                <Text text="{path: 'temp>FARFETCH_ID'}" />
+                                <Text text="{path: 'temp>SKU_DESCRIPTION'}" />
+                                <Image
+                                    src="{temp>SKU_IMAGE}"
+                                    width="95%"
+                                    height="95%"
+                                />
+                                <Text text="{path: 'temp>SEASON'}" />
+                                <Text text="{path: 'temp>BRAND'}" />
+                                <Text text="{path: 'temp>GENDER'}" />
+                                <Text text="{path: 'temp>SUBGENDER'}" />
+                                <Text text="{path: 'temp>FAMILY_GRP'}" />
+                                <Text text="{path: 'temp>PRODUCT_GRP'}" />
+                                <Text
+                                    text="{path: 'temp>VALUE_WHOLESALE',formatter : '.formatter.formatpointToComma'}"
+                                />
+                                <Text
+                                    text="{path: 'temp>VALUE_RETAIL',formatter : '.formatter.formatpointToComma'}"
+                                />
+                                <Text
+                                    text="{path: 'temp>QUANTITY',formatter : '.formatter.removedecimalZero'}"
+                                />
+                                <Text
+                                    text="{path: 'temp>TOT_VALUE_WHOLESALE',formatter : '.formatter.formatpointToComma'}"
+                                />
+                                <Text
+                                    text="{path: 'temp>TOT_VALUE_RETAIL',formatter : '.formatter.formatpointToComma'}"
+                                />
+                                <Text text="{path: 'temp>VALUTA'}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <Button
+                    type="Emphasized"
+                    icon="sap-icon://excel-attachment"
+                    enabled="true"
+                    id="Esporta"
+                    press="onExportExcel"
+                    text="Esporta Excel"
+                    visible="true"
+                />
+                <ToolbarSpacer />
+                <Button
+                    text="Cambia Canale"
+                    press="openDialogChannelSelect"
+                    type="Emphasized"
+                />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

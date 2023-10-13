@@ -185,16 +185,51 @@ sap.ui.define([
 
                     var numArticoli = this.getView().getModel("temp").getData().disponibilitaMarketplace.length
                     var quantity = 0
-                    var wholesale = 0
-                    var retail = 0
+                    var wholesaleEur = 0
+                    var retailEur = 0
+                    var wholesaleChf = 0
+                    var retailChf = 0
+                    var wholesaleGbp = 0
+                    var retailGbp = 0
                     for (let i = 0; i < numArticoli; i++) {
                         quantity = quantity + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].QUANTITY)
-                        wholesale = wholesale + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_WHOLESALE)
-                        retail = retail + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_RETAIL)
+                        if(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].VALUTA === "EUR") {
+                            wholesaleEur = wholesaleEur + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_WHOLESALE)
+                            retailEur = retailEur + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_RETAIL)
+                        } else if(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].VALUTA === "EUR") {
+                            wholesaleEur = wholesaleEur + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_WHOLESALE)
+                            retailEur = retailEur + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_RETAIL)
+                        } else if(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].VALUTA === "CHF") {
+                            wholesaleChf = wholesaleChf + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_WHOLESALE)
+                            retailChf = retailChf + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_RETAIL)
+                        } else if(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].VALUTA === "GBP") {
+                            wholesaleGbp = wholesaleGbp + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_WHOLESALE)
+                            retailGbp = retailGbp + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_RETAIL)
+                        }
                     }
+                    let euro = Intl.NumberFormat('it-DE', {
+                        style: 'currency',
+                        currency: 'EUR',
+                        useGrouping: 'true'
+                    });
+                    let pounds = Intl.NumberFormat('it-DE', {
+                        style: 'currency',
+                        currency: 'GBP',
+                    });
+                    let francs = Intl.NumberFormat('it-DE', {
+                        style: 'currency',
+                        currency: 'CHF',
+                    });
+
                     this.getView().byId("quantityInput").setValue(quantity)
-                    this.getView().byId("wholesaleInput").setValue(wholesale.toFixed(2))
-                    this.getView().byId("retailInput").setValue(retail.toFixed(2))
+                    this.getView().byId("wholesaleInput").setValue(`${euro.format(wholesaleEur)}`)
+                    this.getView().byId("wholesalePounds").setValue(`${pounds.format(wholesaleGbp)}`)
+                    this.getView().byId("wholesaleFrancs").setValue(`${francs.format(wholesaleChf)}`)
+
+                    this.getView().byId("retailInput").setValue(`${euro.format(retailEur)}`)
+                    this.getView().byId("retailInputPounds").setValue(`${pounds.format(retailGbp)}`)
+                    this.getView().byId("retailInputFrancs").setValue(`${francs.format(retailChf)}`)
+                    
                 }
                 let brand = [];
                 if (data.length > 0) {
@@ -461,10 +496,7 @@ sap.ui.define([
                             wholesale = wholesale + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_WHOLESALE)
                             retail = retail + Number(this.getView().getModel("temp").getData().disponibilitaMarketplace[i].TOT_VALUE_RETAIL)
                         }
-                        this.getView().byId("quantityInput").setValue(quantity)
-                        this.getView().byId("wholesaleInput").setValue(wholesale.toFixed(2))
-                        this.getView().byId("retailInput").setValue(retail.toFixed(2))
-
+                        
                         sap.ui.core.BusyIndicator.hide()
                     }.bind(this),
                     error: err => {
@@ -605,6 +637,43 @@ sap.ui.define([
                     unitProperty: "VALUTA"
                     
                 });
+                // aCols.push({
+                //     label: 'Total Value Wholesale (Sterline)',
+                //     property: 'VALUE_WHOLESALE_TOT_P',
+                //     type: EdmType.Currency,
+                //     scale: 2,
+                //     unitProperty: "VALUTA"
+                    
+                // });
+                // aCols.push({
+                //     label: 'Total Value Wholesale (Franchi)',
+                //     property: 'VALUE_WHOLESALE_TOT_C',
+                //     type: EdmType.Currency,
+                //     scale: 2,
+                //     unitProperty: "VALUTA"
+                    
+                // });
+
+
+
+
+
+                // aCols.push({
+                //     label: 'Total Value Wholesale (Sterline)',
+                //     property: 'VALUE_WHOLESALE_TOT_P',
+                //     type: EdmType.Currency,
+                //     scale: 2,
+                //     unitProperty: "VALUTA"
+                    
+                // });
+                // aCols.push({
+                //     label: 'Total Value Wholesale (Franchi)',
+                //     property: 'VALUE_WHOLESALE_TOT_C',
+                //     type: EdmType.Currency,
+                //     scale: 2,
+                //     unitProperty: "VALUTA"
+                    
+                // });
 
                 return aCols;
             },
@@ -636,8 +705,23 @@ sap.ui.define([
                 // }
 
                 oSheet._mSettings.dataSource.data[0].Quantita = this.getView().byId("quantityInput").getValue()
-                oSheet._mSettings.dataSource.data[0].VALUE_WHOLESALE_TOT = this.getView().byId("wholesaleInput").getValue() 
-                oSheet._mSettings.dataSource.data[0].VALUE_RETAIL_TOT = this.getView().byId("retailInput").getValue() 
+
+
+                oSheet._mSettings.dataSource.data[0].VALUE_WHOLESALE_TOT = this.getView().byId("wholesaleInput").getValue()
+                oSheet._mSettings.dataSource.data[2].VALUE_WHOLESALE_TOT = this.getView().byId("wholesalePounds").getValue() 
+                oSheet._mSettings.dataSource.data[1].VALUE_WHOLESALE_TOT = this.getView().byId("wholesaleFrancs").getValue() 
+                // oSheet._mSettings.dataSource.data[0].VALUE_WHOLESALE_TOT_P = this.getView().byId("wholesalePounds").getValue() 
+                // oSheet._mSettings.dataSource.data[0].VALUE_WHOLESALE_TOT_C = this.getView().byId("wholesaleFrancs").getValue() 
+                
+               
+                oSheet._mSettings.dataSource.data[0].VALUE_RETAIL_TOT = this.getView().byId("retailInput").getValue()
+                oSheet._mSettings.dataSource.data[2].VALUE_RETAIL_TOT = this.getView().byId("retailInputPounds").getValue() 
+                oSheet._mSettings.dataSource.data[1].VALUE_RETAIL_TOT = this.getView().byId("retailInputFrancs").getValue() 
+                // oSheet._mSettings.dataSource.data[0].VALUE_RETAIL_TOT_P = this.getView().byId("retailInputPounds").getValue() 
+                // oSheet._mSettings.dataSource.data[0].VALUE_RETAIL_TOT_C = this.getView().byId("retailInputFrancs").getValue() 
+
+
+
                 oSheet._mSettings.dataSource.data[0].SKU_PARENTS_TOT = this.getView().byId("skuParentsInput").getValue()
                 oSheet.build().finally(function () {
                     oSheet.destroy();

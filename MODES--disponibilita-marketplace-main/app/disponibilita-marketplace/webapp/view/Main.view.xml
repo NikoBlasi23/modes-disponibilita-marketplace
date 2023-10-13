@@ -295,7 +295,7 @@
                     <Input
                       id="skuParentsInput"
                       editable="false"
-                      width="15rem"
+                      width="6rem"
                     />
                   </FlexBox>
                   <FlexBox
@@ -305,7 +305,7 @@
                     <Input
                       id="quantityInput"
                       editable="false"
-                      width="15rem"
+                      width="6rem"
                       value="{temp>/FilterquantityInputUniq/quantityInput}"
                     />
                   </FlexBox>
@@ -313,23 +313,54 @@
                     direction="Column"
                   >
                     <Label text="Total Value Wholsesale:" />
+                    <FlexBox >
                     <Input
                       id="wholesaleInput"
                       editable="false"
-                      width="15rem"
+                      width="10rem"
                       value="{temp>/FilterwholesaleInputUniq/wholesaleInput}"
                     />
+                     <Input
+                      id="wholesaleFrancs"
+                      editable="false"
+                      width="10rem"
+                      value="{temp>/FilterwholesaleInputUniq/retailInput}"
+                    /> 
+                    <Input
+                      id="wholesalePounds"
+                      editable="false"
+                      visible="false"
+                      width="10rem"
+                      value="{temp>/FilterwholesaleInputUniq/retailInput}"
+                    /> 
+                   
+                    </FlexBox>
                   </FlexBox>
                   <FlexBox
                     direction="Column"
                   >
                     <Label text="Total Value Retail:" />
-                    <Input
+                    <FlexBox>
+                     <Input
                       id="retailInput"
                       editable="false"
-                      width="15rem"
-                    value="{temp>/FilterretailInputUniq/retailInput}"
-                    />
+                      width="10rem"
+                     value="{temp>/FilterwholesaleInputUniq/retailInput}"
+                    /> 
+                     <Input
+                      id="retailInputFrancs"
+                      editable="false"
+                      width="10rem"
+                      value="{temp>/FilterwholesaleInputUniq/retailInput}"
+                    /> 
+                    <Input
+                      id="retailInputPounds"
+                      editable="false"
+                      visible="false"
+                      width="10rem"
+                      value="{temp>/FilterwholesaleInputUniq/retailInput}"
+                    /> 
+                    </FlexBox>
                   </FlexBox>
                 </FlexBox>
             </fb:FilterBar>

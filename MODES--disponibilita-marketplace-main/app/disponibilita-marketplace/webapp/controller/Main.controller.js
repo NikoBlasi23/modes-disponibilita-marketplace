@@ -127,6 +127,17 @@ sap.ui.define([
                     filters: filtersGrp,
                     success: function (data) {
                         oTempModel.setProperty("/disponibilitaMarketplace", data.results);
+                        
+                        this.getView().byId("skuParentsInput").setValue(0)
+                        this.getView().byId("quantityInput").setValue(0)
+                        this.getView().byId("wholesaleInput").setValue("0,00 €")
+                        this.getView().byId("wholesalePounds").setValue("0,00 GBP")
+                        this.getView().byId("wholesaleFrancs").setValue("0,00 CHF")
+
+                        this.getView().byId("retailInput").setValue("0,00 €")
+                        this.getView().byId("retailInputPounds").setValue("0,00 GBP")
+                        this.getView().byId("retailInputFrancs").setValue("0,00 CHF")
+
                         this.createFilter(data.results)
                         console.log(data.results)
                         sap.ui.core.BusyIndicator.hide()
@@ -210,7 +221,7 @@ sap.ui.define([
                     let euro = Intl.NumberFormat('it-DE', {
                         style: 'currency',
                         currency: 'EUR',
-                        useGrouping: 'true'
+                        useGrouping: 'false'
                     });
                     let pounds = Intl.NumberFormat('it-DE', {
                         style: 'currency',
@@ -624,7 +635,6 @@ sap.ui.define([
                 aCols.push({
                     label: 'Total Value Retail',
                     property: 'VALUE_RETAIL_TOT',
-                    type: EdmType.Currency,
                     scale: 2,
                     unitProperty: "VALUTA"
                     
@@ -632,7 +642,6 @@ sap.ui.define([
                 aCols.push({
                     label: 'Total Value Wholesale',
                     property: 'VALUE_WHOLESALE_TOT',
-                    type: EdmType.Currency,
                     scale: 2,
                     unitProperty: "VALUTA"
                     
@@ -708,14 +717,14 @@ sap.ui.define([
 
 
                 oSheet._mSettings.dataSource.data[0].VALUE_WHOLESALE_TOT = this.getView().byId("wholesaleInput").getValue()
-                oSheet._mSettings.dataSource.data[2].VALUE_WHOLESALE_TOT = this.getView().byId("wholesalePounds").getValue() 
+                //oSheet._mSettings.dataSource.data[2].VALUE_WHOLESALE_TOT = this.getView().byId("wholesalePounds").getValue() 
                 oSheet._mSettings.dataSource.data[1].VALUE_WHOLESALE_TOT = this.getView().byId("wholesaleFrancs").getValue() 
                 // oSheet._mSettings.dataSource.data[0].VALUE_WHOLESALE_TOT_P = this.getView().byId("wholesalePounds").getValue() 
                 // oSheet._mSettings.dataSource.data[0].VALUE_WHOLESALE_TOT_C = this.getView().byId("wholesaleFrancs").getValue() 
                 
                
                 oSheet._mSettings.dataSource.data[0].VALUE_RETAIL_TOT = this.getView().byId("retailInput").getValue()
-                oSheet._mSettings.dataSource.data[2].VALUE_RETAIL_TOT = this.getView().byId("retailInputPounds").getValue() 
+                //oSheet._mSettings.dataSource.data[2].VALUE_RETAIL_TOT = this.getView().byId("retailInputPounds").getValue() 
                 oSheet._mSettings.dataSource.data[1].VALUE_RETAIL_TOT = this.getView().byId("retailInputFrancs").getValue() 
                 // oSheet._mSettings.dataSource.data[0].VALUE_RETAIL_TOT_P = this.getView().byId("retailInputPounds").getValue() 
                 // oSheet._mSettings.dataSource.data[0].VALUE_RETAIL_TOT_C = this.getView().byId("retailInputFrancs").getValue() 
